@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    /* buttons */
+    .btn-white {
+        @apply btn bg-white text-blue-500 border-none normal-case
+    }
+    .btn-blue {
+        @apply btn bg-blue-500 hover:bg-blue-400 text-white border-none normal-case
+    }
+    /* inputs */
+    .input-text-white {
+        @apply input bg-gray-200
+    }
+    .input-text-blue {
+        @apply input bg-blue-200
+    }
+    /* headers */
+    h1 {
+        @apply text-[24px] font-[700]
+    }
+}

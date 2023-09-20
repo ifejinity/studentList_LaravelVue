@@ -10,14 +10,14 @@
                     <option value="local">Local</option>
                     <option value="foreign">Foreign</option>
                 </select>
-                <span v-if="errors.student_type" class="text-[14px] text-red-500 text-red-500 mt-1">{{ errors.student_type }}</span>
+                <span v-if="errors.student_type" class="text-[14px] text-red-500 mt-1">{{ errors.student_type }}</span>
             </div>
             <div class="form-control w-full">
                 <label class="label">
                     <p class="label-text">Email</p>
                 </label>
                 <input type="text" name="email" class="input bg-gray-200" v-model="data.email">
-                <span v-if="errors.email" class="text-[14px] text-red-500 text-red-500 mt-1">{{ errors.email }}</span>
+                <span v-if="errors.email" class="text-[14px] text-red-500 mt-1">{{ errors.email }}</span>
             </div>
         </div>
         <div class="w-full flex md:flex-row flex-col md:gap-5 gap-none">
@@ -26,14 +26,14 @@
                     <p class="label-text">Name</p>
                 </label>
                 <input type="text" name="name" class="input bg-gray-200" v-model="data.name">
-                <span v-if="errors.name" class="text-[14px] text-red-500 text-red-500 mt-1">{{ errors.name }}</span>
+                <span v-if="errors.name" class="text-[14px] text-red-500 mt-1">{{ errors.name }}</span>
             </div>
             <div class="form-control w-full">
                 <label class="label">
                     <p class="label-text">Age</p>
                 </label>
                 <input type="number" name="age" class="input bg-gray-200" v-model="data.age">
-                <span v-if="errors.age" class="text-[14px] text-red-500 text-red-500 mt-1">{{ errors.age }}</span>
+                <span v-if="errors.age" class="text-[14px] text-red-500 mt-1">{{ errors.age }}</span>
             </div>
         </div>
         <div class="w-full flex md:flex-row flex-col md:gap-5 gap-none">
@@ -46,14 +46,14 @@
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                 </select>
-                <span v-if="errors.gender" class="text-[14px] text-red-500 text-red-500 mt-1">{{ errors.gender }}</span>
+                <span v-if="errors.gender" class="text-[14px] text-red-500 mt-1">{{ errors.gender }}</span>
             </div>
             <div class="form-control w-full">
                 <label class="label">
                     <p class="label-text">City</p>
                 </label>
                 <input type="text" name="city" class="input bg-gray-200" v-model="data.city">
-                <span v-if="errors.city" class="text-[14px] text-red-500 text-red-500 mt-1">{{ errors.city }}</span>
+                <span v-if="errors.city" class="text-[14px] text-red-500 mt-1">{{ errors.city }}</span>
             </div>
         </div>
         <div class="w-full flex md:flex-row flex-col md:gap-5 gap-none">
@@ -62,18 +62,18 @@
                     <p class="label-text">Mobile number</p>
                 </label>
                 <input type="text" name="mobile_number" class="input bg-gray-200" v-model="data.mobile_number">
-                <span v-if="errors.mobile_number" class="text-[14px] text-red-500 text-red-500 mt-1">{{ errors.mobile_number }}</span>
+                <span v-if="errors.mobile_number" class="text-[14px] text-red-500 mt-1">{{ errors.mobile_number }}</span>
             </div>
             <div class="form-control w-full">
                 <label class="label">
                     <p class="label-text">Grades</p>
                 </label>
                 <input type="text" name="grades" class="input bg-gray-200" v-model="data.grades">
-                <span v-if="errors.grades" class="text-[14px] text-red-500 text-red-500 mt-1">{{ errors.grades }}</span>
+                <span v-if="errors.grades" class="text-[14px] text-red-500 mt-1">{{ errors.grades }}</span>
             </div>
         </div>
         <input type="hidden" name="id_number" v-model="data.id_number">
-        <button type="button" class="btn-blue mt-5 w-fit self-end max-w-[200px] w-full" :id="method" @click="save">Save</button>
+        <button type="button" class="btn-blue mt-5 self-end max-w-[200px] w-full" :id="method" @click="save">Save</button>
     </form>
 </template>
 

@@ -72,7 +72,7 @@
                 <span v-if="errors.grades" class="text-[14px] text-red-500 text-red-500 mt-1">{{ errors.grades }}</span>
             </div>
         </div>
-        <button type="submit" class="btn-blue mt-5 w-fit self-end max-w-[200px] w-full" :id="method" @click="save">Save</button>
+        <button type="button" class="btn-blue mt-5 w-fit self-end max-w-[200px] w-full" :id="method" @click="save">Save</button>
     </form>
     {{ student }}
 </template>
@@ -124,6 +124,21 @@
             )
         }
     }
+</script>
+
+<script>
+export default {
+        props: {
+            student: Object,
+        },
+        data() {
+            return {
+                student: this.student,
+            };
+        },
+        methods: {
+        },
+};
 </script>
 
 <style scoped>

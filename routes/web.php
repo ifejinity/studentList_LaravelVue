@@ -25,7 +25,7 @@ Route::post('/login', [UserController::class, 'login']);
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/home', [StudentController::class, 'index']);
-    Route::get('/logout', [StudentController::class, 'logout']);
+    Route::get('/logout', [UserController::class, 'logout']);
     Route::get('/create', [StudentController::class, 'create']);
     Route::delete('/delete', [StudentController::class, 'delete']);
     Route::delete('/multiDelete', [StudentController::class, 'delete']);

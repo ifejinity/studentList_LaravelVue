@@ -3,7 +3,7 @@
         <header class="header">
             <h2 class="text-blue-500 cursor-pointer" @click="backHome">StudentList</h2>
             <div>
-                <button type="button" class="btn-blue" @click.prevent="logout">Logout</button>
+                <button type="button" class="btn-blue" @click="logout">Logout</button>
             </div>
         </header>
         <div class="w-full flex flex-col md:px-[10%] px-[5%]">

@@ -72,9 +72,9 @@
                 <span v-if="errors.grades" class="text-[14px] text-red-500 text-red-500 mt-1">{{ errors.grades }}</span>
             </div>
         </div>
+        <input type="hidden" name="id_number" v-model="data.id_number">
         <button type="button" class="btn-blue mt-5 w-fit self-end max-w-[200px] w-full" :id="method" @click="save">Save</button>
     </form>
-    {{ student }}
 </template>
 
 <script setup>
@@ -82,19 +82,21 @@
     import { useForm } from '@inertiajs/vue3';
 
     const data = useForm({
-        student_type: null,
-        name: null,
-        age: null,
-        gender: null,
-        city: null,
-        mobile_number: null,
-        grades: null,
-        email: null,
+        id_number: props.student.id_number ?? null,
+        student_type: props.student.student_type ?? null,
+        name: props.student.name ?? null,
+        age: props.student.age ?? null,
+        gender: props.student.gender ?? null,
+        city: props.student.city ?? null,
+        mobile_number: props.student.mobile_number ?? null,
+        grades: props.student.grades == null ? null : parseFloat(props.student.grades, 2),
+        email: props.student.email ?? null,
     })
     
-    defineProps(['method', 'errors', 'student']);
+    const props = defineProps(['method', 'errors', 'student']);
 
     function save(event) {
+        // create
         if(event.target.id === 'create') {
             function confirmedCallback(isConfirmed) {
                 if (isConfirmed) {
@@ -122,23 +124,37 @@
                 'Yes, proceed!',
                 confirmedCallback
             )
+        } 
+        // edit
+        else if(event.target.id === 'edit') {
+            function confirmedCallback(isConfirmed) {
+                if (isConfirmed) {
+                    router.visit('/editProcess', {
+                        method: 'post', 
+                        data: data,
+                        preserveState: true,
+                        onSuccess: () => {
+                            success('Student updated!');
+                            router.get('/home');
+                        },
+                        onError: () => {
+                            error('Failed to update student!')
+                        },
+                    })
+                }
+            }
+            confirmation(
+                'Are you sure?',
+                "You're about to update a student",
+                'warning',
+                true,
+                '#3085d6',
+                '#d33',
+                'Yes, proceed!',
+                confirmedCallback
+            )
         }
     }
-</script>
-
-<script>
-export default {
-        props: {
-            student: Object,
-        },
-        data() {
-            return {
-                student: this.student,
-            };
-        },
-        methods: {
-        },
-};
 </script>
 
 <style scoped>

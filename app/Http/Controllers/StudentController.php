@@ -10,20 +10,20 @@ use Inertia\Inertia;
 
 class StudentController extends Controller
 {
-    public function inputValidation($request, $numberId = null) {
+    public function inputValidation($request) {
         $validated = $request->validate([
             'student_type' => 'required|in:local,foreign',
             'mobile_number' => [
                 'required', 'min:11', 'max:11', 'regex:#(09|\+639|\+63|0)[0-9]{9}#',
                 Rule::unique('students', 'mobile_number')
                     ->where('name', $request->name)
-                    ->ignore($numberId, 'id_number'),
+                    ->ignore($request->id_number, 'id_number'),
             ],
             'name' => [
                 'required','min:6',
                 Rule::unique('students', 'name')
                     ->where('mobile_number', $request->mobile_number)
-                    ->ignore($numberId, 'id_number'),
+                    ->ignore($request->id_number, 'id_number'),
             ],
             'age' => 'required|integer|between:1,99',
             'gender' => 'in:male,female',
@@ -49,7 +49,8 @@ class StudentController extends Controller
         return Inertia::render('student', [
             'title' => 'Student list | create',
             'header' => 'Add student',
-            'method' => 'create'
+            'method' => 'create',
+            'student' => []
         ]);
     }
 
@@ -59,24 +60,29 @@ class StudentController extends Controller
     }
 
     public function edit(Request $request) {
-        $studentData = Student::where('id_number', $request->id_number)->get();
+        $studentData = Student::where('id_number', $request->id_number)->get()->toArray();
         return Inertia::render('student', [
             'title' => 'Student list | edit',
             'header' => 'Edit student',
             'method' => 'edit',
-            'student' => $studentData
+            'student' => $studentData[0]
         ]);
     }
 
-    public function delete(Request $request) {
-        Student::where('id_number', $request->id_number)->delete();
+    public function editStudent(Request $request) {
+        $validated = $this->inputValidation($request);
+        Student::where('id_number', $request->id_number)->update($validated);
     }
 
-    public function logout(Request $request) {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect('/index');
+    public function delete(Request $request) {
+        if ($request->route()->uri() == 'delete') {
+            Student::where('id_number', $request->id_number)->delete();
+        } else if ($request->route()->uri() == 'multiDelete') {
+            $request->validate([
+                "id_number" => 'required'
+            ]);
+            Student::whereIn('id_number', $request->id_number)->delete();
+        }
     }
 }
 

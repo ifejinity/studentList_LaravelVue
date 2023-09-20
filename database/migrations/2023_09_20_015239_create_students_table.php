@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name', 191);
             $table->integer('age');
             $table->string('city', 191);
+            $table->string('gender', 191);
             $table->string('mobile_number', 12);
             $table->decimal('grades', 30, 15)->nullable();
             $table->string('email', 191);

@@ -2,7 +2,7 @@ import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 
 createInertiaApp({
-    title: title => `Student list | ${title}`,
+    // title: title => `Student list | ${title}`,
     resolve: name => {
         const pages = import.meta.glob('../views/pages/**/*.vue', { eager: true })
         return pages[`../views/pages/${name}.vue`]
@@ -13,9 +13,3 @@ createInertiaApp({
         .mount(el)
     },
 })
-
-// export default {
-//     props: {
-//         errors: Object,
-//     }
-// }

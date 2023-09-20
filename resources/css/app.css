@@ -21,4 +21,8 @@
     h1 {
         @apply text-[24px] font-[700]
     }
+
+    h2 {
+        @apply text-[20px] font-[700]
+    }
 }

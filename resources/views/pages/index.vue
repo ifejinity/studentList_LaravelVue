@@ -5,13 +5,13 @@
         <form @submit.prevent="login" class="loginForm">
             <h1 class="text-blue-500 mb-2">Sign in</h1>
             <input type="text" name="" id="" class="input-text-white mt-3" placeholder="Email" v-model="credentials.email">
-            <div v-if="errors.email" class="text-[14px] text-red-500">{{ errors.email }}</div>
-            <input type="text" name="" id="" class="input-text-white mt-3" placeholder="Password" v-model="credentials.password">
-            <div v-if="errors.password" class="text-[14px] text-red-500">{{ errors.password }}</div>
+            <span v-if="errors.email" class="text-[14px] text-red-500">{{ errors.email }}</span>
+            <input type="password" name="" id="" class="input-text-white mt-3" placeholder="Password" v-model="credentials.password">
+            <span v-if="errors.password" class="text-[14px] text-red-500">{{ errors.password }}</span>
             <div class="form-control mt-3">
                 <label class="label cursor-pointer w-fit">
                     <span class="label-text">Remember me</span> 
-                    <input type="checkbox" class="checkbox checkbox-sm ml-3" />
+                    <input type="checkbox" v-model="credentials.remember" class="checkbox checkbox-sm ml-3" />
                 </label>
             </div>
             <button type="submit" class="btn-blue w-fit mt-3 self-end">Login</button>
@@ -21,23 +21,31 @@
 
 <script setup>
     import { Head } from '@inertiajs/vue3';
-    import { reactive } from 'vue';
     import { router } from '@inertiajs/vue3';
-    defineProps(['errors'])
-    const credentials = reactive({
-        email: null,
-        password: null,
-    });
+    import { useForm } from '@inertiajs/vue3';
 
+    defineProps(['errors'])
+
+    // user credentials
+    const credentials = useForm({
+        email: 'mrlonzanida08@gmail.com',
+        password: null,
+        remember: false,
+    });
+    
     // login function
     function login() {
         router.visit('/login', {
             method: 'post',
-            data: {
-                email: credentials.email,
-                password: credentials.password
-            },
+            data: credentials,
             preserveState: true,
+            onSuccess: () => {
+                success('Login success!');
+                router.get('/home');
+            },
+            onError: () => {
+                error('Login failed!');
+            },
         })
     }
 </script>

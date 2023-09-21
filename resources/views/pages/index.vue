@@ -41,7 +41,6 @@
             preserveState: true,
             onSuccess: () => {
                 success('Login success!');
-                router.get('/home');
             },
             onError: () => {
                 error('Login failed!');

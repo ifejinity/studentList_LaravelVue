@@ -19,9 +19,7 @@ class UserController extends Controller
         $remembered = $request->remember != false;
         if(Auth::attempt($validated, $remembered)) {
             $request->session()->regenerate();
-            return Inertia::render('home', [
-                'student' => Student::all()
-            ]);
+            return redirect('/home');
         }
     }
     // logout

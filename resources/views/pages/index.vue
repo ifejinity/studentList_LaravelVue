@@ -16,7 +16,7 @@
                     <input type="checkbox" v-model="credentials.remember" class="checkbox checkbox-sm ml-3" />
                 </label>
             </div>
-            <button type="submit" class="btn-blue w-fit mt-3 self-end">Login</button>
+            <button type="submit" class="btn-blue w-full max-w-[200px] mt-3 self-end">Login</button>
         </form>
     </div>
 </template>

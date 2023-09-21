@@ -1,7 +1,13 @@
 <template>
     <div>
         <title>Student list | Home</title>
-        <div>
+        <div class="flex gap-2 justify-between">
+            <div class="dropdown dropdown-xs self-end">
+                <label tabindex="0" class="btn-sm btn normal-case bi bi-caret-down-fill">Multiple action</label>
+                <ul tabindex="0" class="dropdown-content z-[2] menu p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><button @click="mutiDelete">Delete selected</button></li>
+                </ul>
+            </div>
             <div class="form-control w-full max-w-xs">
                 <label class="label">
                     <span class="label-text">Filter Student type</span>
@@ -17,26 +23,19 @@
         <div class="overflow-x-auto">
             <table class="table" id="myTable">
                 <thead>
-                <tr>
-                    <th>
-                        <div class="dropdown dropdown-xs">
-                            <label tabindex="0" class="btn-sm btn normal-case bi bi-three-dots-vertical"></label>
-                            <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                                <li><button @click="mutiDelete">Delete selected</button></li>
-                            </ul>
-                        </div>
-                    </th>
-                    <th>Student type</th>
-                    <th>ID number</th>
-                    <th>Name</th>
-                    <th>Age</th>
-                    <th>Gender</th>
-                    <th>City</th>
-                    <th>Mobile number</th>
-                    <th>Grades</th>
-                    <th>Email</th>
-                    <th>Action</th>
-                </tr>
+                    <tr>
+                        <th></th>
+                        <th>Student type</th>
+                        <th>ID number</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>City</th>
+                        <th>Mobile number</th>
+                        <th>Grades</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
                 </thead>
                 <tbody id="list">
                     <tr v-for="item in student" class="hover:bg-blue-200/30">
@@ -58,8 +57,8 @@
                         <td>{{ parseFloat(item.grades, 2) }}</td>
                         <td><a :href="`mailto:${item.email}`" class="link text-blue-500">{{ item.email }}</a></td>
                         <td class="flex gap-2">
-                            <button class="btn-delete" @click="deleteStudent(item.id_number)">Delete</button>
-                            <button class="btn-blue" @click="editStudent(item.id_number)">Edit</button>
+                            <button class="btn btn-delete text-base bi bi-trash3" @click="deleteStudent(item.id_number)"></button>
+                            <button class="btn btn-blue text-base bi bi-pencil-square" @click="editStudent(item.id_number)"></button>
                         </td>
                     </tr>
                 </tbody>

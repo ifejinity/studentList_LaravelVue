@@ -2,7 +2,7 @@
     <div>
         <title>{{ title }}</title>
         <h1 class="text-blue-500">{{ header }}</h1>
-        <StudentForm :method="method" :errors="errors" :student="student"/>
+        <StudentForm :method="method" :errors="errors" :student="student" class="mt-[50px]"/>
     </div>
 </template>
 

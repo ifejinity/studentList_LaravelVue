@@ -1,14 +1,12 @@
 <template>
-    <div>
-        <header class="header">
-            <h2 class="text-blue-500 cursor-pointer btn normal-case btn-ghost text-[18px]" @click="backHome">StudentList</h2>
-            <div>
-                <button type="button" class="btn-blue" @click="logout">Logout</button>
-            </div>
-        </header>
-        <div class="w-full flex flex-col md:px-[10%] px-[5%]">
-            <slot></slot>
+    <header class="header">
+        <h2 class="text-blue-500 cursor-pointer btn normal-case btn-ghost text-[18px]" @click="backHome">StudentList</h2>
+        <div>
+            <button type="button" class="btn-blue" @click="logout">Logout</button>
         </div>
+    </header>
+    <div class="w-full flex flex-col md:px-[10%] px-[5%]">
+        <slot></slot>
     </div>
 </template>
 

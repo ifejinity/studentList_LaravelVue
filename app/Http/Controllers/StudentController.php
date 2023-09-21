@@ -41,9 +41,9 @@ class StudentController extends Controller
 
     public function index(Request $request) {
         if($request->student_type === null) {
-            $studentData = Student::all();
+            $studentData = Student::orderBy('updated_at', 'desc')->get();
         } else {
-            $studentData = Student::where('student_type', $request->student_type)->get();
+            $studentData = Student::where('student_type', $request->student_type)->orderBy('updated_at', 'desc')->get();
         }
         return Inertia::render('home',[
             'student' => $studentData,

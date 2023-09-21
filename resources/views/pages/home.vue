@@ -10,18 +10,18 @@
                 </ul>
                 <p class="mt-2 text-[14px] font-[500]">Number of records: {{ student.length }}</p>
             </div>
-            <div class="flex gap-3">
-                <div class="form-control w-full max-w-xs">
+            <div class="flex gap-3 md:flex-row flex-col">
+                <div class="form-control w-full md:max-w-xs">
                     <label class="label">
                         <span class="label-text">Search</span>
                     </label>
                     <input type="text" @input="search($event)" class="input input-bordered" placeholder="Name or ID number"/>
                 </div>
-                <div class="form-control w-full max-w-xs">
+                <div class="form-control w-full md:max-w-xs">
                     <label class="label">
                         <span class="label-text">Filter Student type</span>
                     </label>
-                    <select @change="filter($event)" class="select select-bordered w-full max-w-xs" :value="type">
+                    <select @change="filter($event)" class="select select-bordered w-full md:max-w-xs" :value="type">
                         <option selected disabled>Select type</option>
                         <option value="">All</option>
                         <option value="foreign">Foreign</option>
@@ -194,7 +194,6 @@
                     const minutesDifference = Math.floor(timeDifference / (1000 * 60) * -1);
                     return minutesDifference;
                 }
-
                 const datetimeString = date;
                 const minutesDifference = calculateMinutesDifference(datetimeString);
                 return minutesDifference

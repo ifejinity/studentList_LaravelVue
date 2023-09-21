@@ -35,5 +35,5 @@ function error(message) {
 export default {
     confirmation, 
     success,
-    error
+    error,
 }

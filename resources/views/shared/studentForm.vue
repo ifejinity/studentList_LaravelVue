@@ -107,7 +107,6 @@
                         preserveState: true,
                         onSuccess: () => {
                             customJs.success('Student added!');
-                            router.get('/home');
                         },
                         onError: () => {
                             customJs.error('Failed to add student!')

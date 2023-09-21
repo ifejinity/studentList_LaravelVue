@@ -8,7 +8,7 @@
         @vite('resources/js/app.js')
         @inertiaHead
     </head>
-    <body class="select-none">
+    <body class="select-none antialiased">
         @inertia
     </body>
 </html>

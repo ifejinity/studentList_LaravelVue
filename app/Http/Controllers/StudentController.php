@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
@@ -64,6 +63,7 @@ class StudentController extends Controller
         $validated = $this->inputValidation($request);
         $data = Arr::add($validated, 'gender', $request->gender);
         Student::create($data);
+        return redirect('/home');
     }
 
     public function edit(Request $request) {

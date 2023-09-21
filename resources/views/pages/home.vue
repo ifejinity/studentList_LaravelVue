@@ -1,23 +1,33 @@
 <template>
-    <div>
+    <div class="k">
         <title>Student list | Home</title>
         <div class="flex gap-2 justify-between md:flex-row flex-col">
             <div class="dropdown dropdown-xs self-end">
                 <label tabindex="0" class="btn-sm btn normal-case bi bi-caret-down-fill">Multiple action</label>
                 <ul tabindex="0" class="dropdown-content z-[2] menu p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><button @click="selectAll($event)">Select all</button></li>
                     <li><button @click="mutiDelete">Delete selected</button></li>
                 </ul>
+                <p class="mt-2 text-[14px] font-[500]">Number of records: {{ student.length }}</p>
             </div>
-            <div class="form-control w-full max-w-xs">
-                <label class="label">
-                    <span class="label-text">Filter Student type</span>
-                </label>
-                <select @change="filter($event)" class="select select-bordered w-full max-w-xs" :value="type">
-                    <option selected disabled>Select type</option>
-                    <option value="">All</option>
-                    <option value="foreign">Foreign</option>
-                    <option value="local">Local</option>
-                </select>
+            <div class="flex gap-3">
+                <div class="form-control w-full max-w-xs">
+                    <label class="label">
+                        <span class="label-text">Search</span>
+                    </label>
+                    <input type="text" @input="search($event)" class="input input-bordered" placeholder="Name or ID number"/>
+                </div>
+                <div class="form-control w-full max-w-xs">
+                    <label class="label">
+                        <span class="label-text">Filter Student type</span>
+                    </label>
+                    <select @change="filter($event)" class="select select-bordered w-full max-w-xs" :value="type">
+                        <option selected disabled>Select type</option>
+                        <option value="">All</option>
+                        <option value="foreign">Foreign</option>
+                        <option value="local">Local</option>
+                    </select>
+                </div>
             </div>
         </div>
         <div class="overflow-x-auto">
@@ -67,7 +77,7 @@
                 <h1 class="text-[50px] text-blue-500/30">No data</h1>
             </div>
         </div>
-        <button type="button" class="btn-blue absolute bottom-[24px] right-[24px]" @click="createPage">Add Student</button>
+        <button type="button" class="btn-blue fixed bottom-[24px] right-[24px]" @click="createPage">Add Student</button>
     </div>
 </template>
 
@@ -98,7 +108,7 @@
                             },
                             onError: () => {
                                 customJs.error('Deletion failed!')
-                            },
+                            }
                         })
                     }
                 }
@@ -118,6 +128,25 @@
                     method: 'get',
                     data: { id_number:id },
                 });
+            },
+            selectAll(event){
+                if(event.target.innerText == "Select all") {
+                    const checkboxes = document.querySelectorAll('.checkbox:not(:checked)');
+                    checkboxes.forEach((checkbox) => {
+                        if(!checkbox.closest('tr').classList.contains('hidden')){
+                            checkbox.checked = true;
+                        }
+                    });
+                    event.target.innerText = "Unselect all"
+                } else {
+                    const checkboxes = document.querySelectorAll('.checkbox:checked');
+                    checkboxes.forEach((checkbox) => {
+                        if(!checkbox.closest('tr').classList.contains('hidden')){
+                            checkbox.checked = false;
+                        }
+                    });
+                    event.target.innerText = "Select all"
+                }
             },
             mutiDelete() {
                 const selected = document.querySelectorAll('.checkbox:checked');
@@ -169,6 +198,19 @@
                 const datetimeString = date;
                 const minutesDifference = calculateMinutesDifference(datetimeString);
                 return minutesDifference
+            },
+            search(event) {
+                const list = document.querySelectorAll('#list tr');
+                list.forEach((e) => {
+                    const name = e.getElementsByTagName('td')[3].innerText;
+                    const id = e.getElementsByTagName('td')[2].innerText;
+                    const pattern = new RegExp(event.target.value.trim(), 'i');
+                    if (!pattern.test(name) && !pattern.test(id)) {
+                        e.classList.add('hidden');
+                    } else {
+                        e.classList.remove('hidden');
+                    }
+                })
             }
         }
     }

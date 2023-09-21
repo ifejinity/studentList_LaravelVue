@@ -80,6 +80,7 @@
 <script setup>
     import { router } from '@inertiajs/vue3';
     import { useForm } from '@inertiajs/vue3';
+    import customJs from '../../js/global';
 
     const data = useForm({
         id_number: props.student.id_number ?? null,
@@ -105,16 +106,16 @@
                         data: data,
                         preserveState: true,
                         onSuccess: () => {
-                            success('Student added!');
+                            customJs.success('Student added!');
                             router.get('/home');
                         },
                         onError: () => {
-                            error('Failed to add student!')
+                            customJs.error('Failed to add student!')
                         },
                     })
                 }
             }
-            confirmation(
+            customJs.confirmation(
                 'Are you sure?',
                 "You're about to create a student",
                 'warning',
@@ -134,15 +135,15 @@
                         data: data,
                         preserveState: true,
                         onSuccess: () => {
-                            success('Student updated!');
+                            customJs.success('Student updated!');
                         },
                         onError: () => {
-                            error('Failed to update student!')
+                            customJs.error('Failed to update student!')
                         },
                     })
                 }
             }
-            confirmation(
+            customJs.confirmation(
                 'Are you sure?',
                 "You're about to update a student",
                 'warning',

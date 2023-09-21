@@ -12,6 +12,7 @@
 
 <script setup>
     import { router } from '@inertiajs/vue3';
+    import customJs from '../../js/global';
 
     function logout() {
         function confirmedCallback(isConfirmed) {
@@ -19,7 +20,7 @@
                 router.get('/logout')
             }
         }
-        confirmation(
+        customJs.confirmation(
             'Are you sure?',
             "You're about to logout an account!",
             'warning',

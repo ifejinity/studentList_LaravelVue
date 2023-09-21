@@ -1,7 +1,7 @@
 <template>
     <div>
         <title>Student list | Home</title>
-        <div class="flex gap-2 justify-between">
+        <div class="flex gap-2 justify-between md:flex-row flex-col">
             <div class="dropdown dropdown-xs self-end">
                 <label tabindex="0" class="btn-sm btn normal-case bi bi-caret-down-fill">Multiple action</label>
                 <ul tabindex="0" class="dropdown-content z-[2] menu p-2 shadow bg-base-100 rounded-box w-52">
@@ -75,6 +75,7 @@
     import { Head } from '@inertiajs/vue3';
     import AuthLayout from '../shared/auth.vue';
     import { router } from '@inertiajs/vue3';
+    import customJs from '../../js/global';
 
     export default {
         layout: AuthLayout,
@@ -93,15 +94,15 @@
                             method: 'delete', 
                             data: {id_number:id},
                             onSuccess: () => {
-                                success('Student deleted!');
+                                customJs.success('Student deleted!');
                             },
                             onError: () => {
-                                error('Deletion failed!')
+                                customJs.error('Deletion failed!')
                             },
                         })
                     }
                 }
-                confirmation(
+                customJs.confirmation(
                     'Are you sure?',
                     "You won't be able to revert this!",
                     'warning',
@@ -130,15 +131,15 @@
                             method: 'delete', 
                             data: {id_number:selectedIds},
                             onSuccess: () => {
-                                success('Student deleted!');
+                                customJs.success('Student deleted!');
                             },
                             onError: () => {
-                                error('Deletion failed!');
+                                customJs.error('Deletion failed!');
                             },
                         })
                     }
                 }
-                confirmation(
+                customJs.confirmation(
                     'Are you sure?',
                     "You won't be able to revert this!",
                     'warning',

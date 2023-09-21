@@ -25,6 +25,7 @@
     import { Head } from '@inertiajs/vue3';
     import { router } from '@inertiajs/vue3';
     import { useForm } from '@inertiajs/vue3';
+    import customJs from '../../js/global';
 
     const props = defineProps(['errors'])
 
@@ -42,10 +43,10 @@
             data: credentials,
             preserveState: true,
             onSuccess: () => {
-                success('Login success!');
+                customJs.success('Login success!');
             },
             onError: () => {
-                error(props.errors.message ?? 'Login failed!');
+                customJs.error(props.errors.message ?? 'Login failed!');
             },
         })
     }

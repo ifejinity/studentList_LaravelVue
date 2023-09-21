@@ -17,13 +17,13 @@ class StudentController extends Controller
                 'required', 'min:11', 'max:11', 'regex:#(09|\+639|\+63|0)[0-9]{9}#',
                 Rule::unique('students', 'mobile_number')
                     ->where('name', $request->name)
-                    ->ignore($request->id_number, 'id_number'),
+                    ->ignore($request->id, 'id'),
             ],
             'name' => [
                 'required','min:6',
                 Rule::unique('students', 'name')
                     ->where('mobile_number', $request->mobile_number)
-                    ->ignore($request->id_number, 'id_number'),
+                    ->ignore($request->id, 'id'),
             ],
             'age' => 'required|integer|between:1,99',
             'city' => 'required',
@@ -66,8 +66,8 @@ class StudentController extends Controller
         return redirect('/home');
     }
 
-    public function edit($id_number) {
-        $studentData = Student::where('id_number', $id_number)->get()->toArray();
+    public function edit($id) {
+        $studentData = Student::findOrFail($id)->get()->toArray();
         return Inertia::render('student', [
             'title' => 'Student list | edit',
             'header' => 'Edit student',
@@ -79,18 +79,18 @@ class StudentController extends Controller
     public function editStudent(Request $request) {
         $validated = $this->inputValidation($request);
         $data = Arr::add($validated, 'gender', $request->gender);
-        Student::where('id_number', $request->id_number)->update($data);
+        Student::where('id', $request->id)->update($data);
         return redirect('/home');
     }
 
     public function delete(Request $request) {
         if ($request->route()->uri() == 'delete') {
-            Student::where('id_number', $request->id_number)->delete();
+            Student::find($request->id)->delete();
         } else if ($request->route()->uri() == 'multiDelete') {
             $request->validate([
-                "id_number" => 'required'
+                "id" => 'required'
             ]);
-            Student::whereIn('id_number', $request->id_number)->delete();
+            Student::whereIn('id', $request->id)->delete();
         }
     }
 }

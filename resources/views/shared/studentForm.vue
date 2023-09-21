@@ -72,7 +72,7 @@
                 <span v-if="errors.grades" class="text-[14px] text-red-500 mt-1">{{ errors.grades }}</span>
             </div>
         </div>
-        <input type="hidden" name="id_number" v-model="data.id_number">
+        <input type="hidden" name="id" v-model="data.id">
         <button type="button" class="btn-blue mt-5 self-end max-w-[200px] w-full" :id="method" @click="save">Save</button>
     </form>
 </template>
@@ -83,7 +83,7 @@
     import customJs from '../../js/global';
 
     const data = useForm({
-        id_number: props.student.id_number ?? null,
+        id: props.student.id ?? null,
         student_type: props.student.student_type ?? null,
         name: props.student.name ?? null,
         age: props.student.age ?? null,

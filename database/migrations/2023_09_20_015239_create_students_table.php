@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('students', function (Blueprint $table) {
-            $table->bigIncrements('id_number');
+            $table->bigIncrements('id');
             $table->string('student_type', 191);
             $table->string('name', 191);
             $table->integer('age');
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('email', 191);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
-            $table->unique(array('id_number', 'name', 'mobile_number'), 'idx');
+            $table->unique(array('id', 'name', 'mobile_number'), 'idx');
         });
     }
 

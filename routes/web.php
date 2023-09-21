@@ -20,7 +20,7 @@ Route::get('/', function () {
 });
 
 Route::inertia('/index', 'index')->name('index')->middleware('guest');
-Route::post('/login', [UserController::class, 'login'])->middleware('guest');
+Route::get('/login', [UserController::class, 'login'])->middleware('guest');
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/home', [StudentController::class, 'index']);

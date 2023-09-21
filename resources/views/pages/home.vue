@@ -50,7 +50,7 @@
                 <tbody id="list">
                     <tr v-for="item in student" class="hover:bg-blue-200/30">
                         <td>
-                            <input type="checkbox" class="checkbox checkbox-sm" :value="item.id_number"/>
+                            <input type="checkbox" class="checkbox checkbox-sm" :value="item.id"/>
                         </td>
                         <td>
                             <div class="indicator">
@@ -58,7 +58,7 @@
                                 <p class="pt-2">{{ item.student_type }}</p>
                             </div>
                         </td>
-                        <td>{{ item.id_number }}</td>
+                        <td>{{ item.id }}</td>
                         <td>{{ item.name }}</td>
                         <td>{{ item.age }}</td>
                         <td>{{ item.gender }}</td>
@@ -67,8 +67,8 @@
                         <td>{{ parseFloat(item.grades, 2) }}</td>
                         <td><a :href="`mailto:${item.email}`" class="link text-blue-500">{{ item.email }}</a></td>
                         <td class="flex gap-2">
-                            <button class="btn btn-delete text-base bi bi-trash3" @click="deleteStudent(item.id_number)"></button>
-                            <Link :href="`edit/${item.id_number}`" method="get" as="button" type="button" class="btn btn-blue text-base bi bi-pencil-square"></Link>
+                            <button class="btn btn-delete text-base bi bi-trash3" @click="deleteStudent(item.id)"></button>
+                            <Link :href="`edit/${item.id}`" method="get" as="button" type="button" class="btn btn-blue text-base bi bi-pencil-square"></Link>
                         </td>
                     </tr>
                 </tbody>
@@ -99,7 +99,7 @@
                     if (isConfirmed) {
                         router.visit('/delete', {
                             method: 'delete', 
-                            data: {id_number:id},
+                            data: {id:id},
                             onSuccess: () => {
                                 customJs.success('Student deleted!');
                             },
@@ -151,7 +151,7 @@
                     if (isConfirmed) {
                         router.visit('/multiDelete', {
                             method: 'delete', 
-                            data: {id_number:selectedIds},
+                            data: {id:selectedIds},
                             onSuccess: () => {
                                 customJs.success('Student deleted!');
                             },

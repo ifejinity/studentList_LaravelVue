@@ -39,7 +39,7 @@
     // login function
     function login() {
         router.visit('/login', {
-            method: 'post',
+            method: 'get',
             data: credentials,
             preserveState: true,
             onSuccess: () => {

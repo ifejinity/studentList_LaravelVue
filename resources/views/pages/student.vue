@@ -1,15 +1,13 @@
 <template>
     <div>
-        <Head>
-            <title>{{ title }}</title>
-        </Head>
+        <title>{{ title }}</title>
         <h1 class="text-blue-500">{{ header }}</h1>
         <StudentForm :method="method" :errors="errors" :student="student"/>
     </div>
 </template>
 
 <script>
-    import { Head } from '@inertiajs/vue3';
+    // import { Head } from '@inertiajs/vue3';
     import AuthLayout from '../shared/auth.vue';
     import StudentForm from '../shared/studentForm.vue';
 

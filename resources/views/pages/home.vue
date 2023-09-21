@@ -1,8 +1,6 @@
 <template>
     <div>
-        <Head>
-            <title>Student list | Home</title>
-        </Head>
+        <title>Student list | Home</title>
         <div>
             <div class="form-control w-full max-w-xs">
                 <label class="label">
@@ -45,15 +43,20 @@
                         <td>
                             <input type="checkbox" class="checkbox checkbox-sm" :value="item.id_number"/>
                         </td>
-                        <td>{{ item.student_type }}</td>
+                        <td>
+                            <div class="indicator">
+                                <span class="indicator-item indicator-start badge badge-success text-white" v-if="diffMins(item.updated_at) <= 5">new</span> 
+                                <p class="pt-2">{{ item.student_type }}</p>
+                            </div>
+                        </td>
                         <td>{{ item.id_number }}</td>
                         <td>{{ item.name }}</td>
                         <td>{{ item.age }}</td>
                         <td>{{ item.gender }}</td>
                         <td>{{ item.city }}</td>
-                        <td>{{ item.mobile_number }}</td>
+                        <td><a :href="`tel:${item.mobile_number}`" class="link text-blue-500">{{ item.mobile_number }}</a></td>
                         <td>{{ parseFloat(item.grades, 2) }}</td>
-                        <td>{{ item.email }}</td>
+                        <td><a :href="`mailto:${item.email}`" class="link text-blue-500">{{ item.email }}</a></td>
                         <td class="flex gap-2">
                             <button class="btn-delete" @click="deleteStudent(item.id_number)">Delete</button>
                             <button class="btn-blue" @click="editStudent(item.id_number)">Edit</button>
@@ -153,6 +156,19 @@
                     method: 'get',
                     data: {student_type:type}
                 })
+            },
+            diffMins(date) {
+                function calculateMinutesDifference(datetimeString) {
+                    const targetDate = new Date(datetimeString);
+                    const currentDate = new Date();
+                    const timeDifference = targetDate.getTime() - currentDate.getTime();
+                    const minutesDifference = Math.floor(timeDifference / (1000 * 60) * -1);
+                    return minutesDifference;
+                }
+
+                const datetimeString = date;
+                const minutesDifference = calculateMinutesDifference(datetimeString);
+                return minutesDifference
             }
         }
     }

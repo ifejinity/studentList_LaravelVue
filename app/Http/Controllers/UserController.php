@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,6 +17,8 @@ class UserController extends Controller
         if(Auth::attempt($validated, $remembered)) {
             $request->session()->regenerate();
             return redirect('/home');
+        } else {
+            return redirect()->back()->withErrors(['message' => 'Authentication failed. Please check your credentials.']);
         }
     }
     // logout

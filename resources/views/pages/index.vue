@@ -1,7 +1,7 @@
 <template>
     <div class="loginPage">
         <head>
-            <title>"Student list | Login"</title>
+            <title>Student list | Login</title>
         </head>
         <!-- login form -->
         <form @submit.prevent="login" class="loginForm">
@@ -26,7 +26,7 @@
     import { router } from '@inertiajs/vue3';
     import { useForm } from '@inertiajs/vue3';
 
-    defineProps(['errors'])
+    const props = defineProps(['errors'])
 
     // user credentials
     const credentials = useForm({
@@ -45,7 +45,7 @@
                 success('Login success!');
             },
             onError: () => {
-                error('Login failed!');
+                error(props.errors.message ?? 'Login failed!');
             },
         })
     }

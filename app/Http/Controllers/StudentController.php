@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
@@ -60,7 +61,8 @@ class StudentController extends Controller
 
     public function createStudent(Request $request) {
         $validated = $this->inputValidation($request);
-        Student::create($validated);
+        $data = Arr::add($validated, 'gender', $request->gender);
+        Student::create($data);
     }
 
     public function edit(Request $request) {
@@ -75,7 +77,8 @@ class StudentController extends Controller
 
     public function editStudent(Request $request) {
         $validated = $this->inputValidation($request);
-        Student::where('id_number', $request->id_number)->update($validated);
+        $data = Arr::add($validated, 'gender', $request->gender);
+        Student::where('id_number', $request->id_number)->update($data);
         return redirect('/home');
     }
 

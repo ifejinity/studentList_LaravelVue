@@ -46,8 +46,8 @@
                         <td>{{ parseFloat(item.grades, 2) }}</td>
                         <td>{{ item.email }}</td>
                         <td class="flex gap-2">
-                            <button class="btn btn-sm bg-red-500 hover:bg-red-400 text-white" @click="deleteStudent(item.id_number)">Delete</button>
-                            <button class="btn btn-sm bg-blue-500 hover:bg-blue-400 text-white" @click="editStudent(item.id_number)">Edit</button>
+                            <button class="btn-delete" @click="deleteStudent(item.id_number)">Delete</button>
+                            <button class="btn-blue" @click="editStudent(item.id_number)">Edit</button>
                         </td>
                     </tr>
                 </tbody>

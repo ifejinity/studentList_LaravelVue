@@ -72,6 +72,7 @@ class StudentController extends Controller
     public function editStudent(Request $request) {
         $validated = $this->inputValidation($request);
         Student::where('id_number', $request->id_number)->update($validated);
+        return redirect('/home');
     }
 
     public function delete(Request $request) {

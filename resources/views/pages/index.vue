@@ -1,6 +1,6 @@
 <template>
     <div class="loginPage">
-        <Head title="Login" />
+        <Head title="Student list | Login" />
         <!-- login form -->
         <form @submit.prevent="login" class="loginForm">
             <h1 class="text-blue-500 mb-2">Sign in</h1>

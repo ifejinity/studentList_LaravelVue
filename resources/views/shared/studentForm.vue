@@ -135,7 +135,6 @@
                         preserveState: true,
                         onSuccess: () => {
                             success('Student updated!');
-                            router.get('/home');
                         },
                         onError: () => {
                             error('Failed to update student!')

@@ -4,11 +4,20 @@
             <title>Student list | Home</title>
         </Head>
         <div>
-            
+            <div class="form-control w-full max-w-xs">
+                <label class="label">
+                    <span class="label-text">Filter Student type</span>
+                </label>
+                <select @change="filter($event)" class="select select-bordered w-full max-w-xs" :value="type">
+                    <option selected disabled>Select type</option>
+                    <option value="">All</option>
+                    <option value="foreign">Foreign</option>
+                    <option value="local">Local</option>
+                </select>
+            </div>
         </div>
         <div class="overflow-x-auto">
             <table class="table" id="myTable">
-                <!-- head -->
                 <thead>
                 <tr>
                     <th>
@@ -32,7 +41,7 @@
                 </tr>
                 </thead>
                 <tbody id="list">
-                    <tr v-for="item in student">
+                    <tr v-for="item in student" class="hover:bg-blue-200/30">
                         <td>
                             <input type="checkbox" class="checkbox checkbox-sm" :value="item.id_number"/>
                         </td>
@@ -68,7 +77,8 @@
     export default {
         layout: AuthLayout,
         props: {
-            student: Object
+            student: Object,
+            type: String
         },
         methods: {
             createPage() {
@@ -136,6 +146,13 @@
                     'Yes, proceed!',
                     confirmedCallback
                 )
+            },
+            filter(event) {
+                let type = event.target.value;
+                router.visit('/home', {
+                    method: 'get',
+                    data: {student_type:type}
+                })
             }
         }
     }

@@ -1,7 +1,7 @@
 <template>
     <div>
         <header class="header">
-            <h2 class="text-blue-500 cursor-pointer" @click="backHome">StudentList</h2>
+            <h2 class="text-blue-500 cursor-pointer btn normal-case btn-ghost text-[18px]" @click="backHome">StudentList</h2>
             <div>
                 <button type="button" class="btn-blue" @click="logout">Logout</button>
             </div>

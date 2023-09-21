@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Inertia\Inertia;
 
 class UserController extends Controller
 {

@@ -5,13 +5,13 @@
 @layer components {
     /* buttons */
     .btn-white {
-        @apply btn bg-white text-blue-500 border-none normal-case
+        @apply btn bg-white text-blue-500 border-none normal-case active:ring-4
     }
     .btn-blue {
-        @apply btn bg-blue-500 hover:bg-blue-400 text-white border-none normal-case
+        @apply btn bg-blue-500 hover:bg-blue-400 text-white border-none normal-case active:ring-4
     }
     .btn-delete {
-        @apply btn bg-red-500 hover:bg-red-400 text-white border-none normal-case
+        @apply btn bg-red-500 hover:bg-red-400 text-white border-none normal-case active:ring-4
     }
     /* inputs */
     .input-text-white {
@@ -24,7 +24,6 @@
     h1 {
         @apply text-[24px] font-[700]
     }
-
     h2 {
         @apply text-[20px] font-[700]
     }

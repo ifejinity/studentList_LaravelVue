@@ -16,7 +16,7 @@
         @vite('resources/js/app.js')
         @inertiaHead
     </head>
-    <body>
+    <body class="select-none">
         @inertia
     </body>
     <script>

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
@@ -26,7 +25,6 @@ class StudentController extends Controller
                     ->ignore($request->id_number, 'id_number'),
             ],
             'age' => 'required|integer|between:1,99',
-            'gender' => 'in:male,female',
             'city' => 'required',
             'grades' => 'required|numeric|between:0,100',
             'email' => 'required|email'
@@ -39,9 +37,15 @@ class StudentController extends Controller
         return $validated;
     }
 
-    public function index() {
+    public function index(Request $request) {
+        if($request->student_type === null) {
+            $studentData = Student::all();
+        } else {
+            $studentData = Student::where('student_type', $request->student_type)->get();
+        }
         return Inertia::render('home',[
-            'student' => Student::all()
+            'student' => $studentData,
+            'type' => $request->student_type
         ]);
     }
 

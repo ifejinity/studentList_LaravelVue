@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     use HasFactory;
-    protected $guarded = ['id_number'];
+    protected $guarded = ['id_number', 'created_at', 'updated_at'];
 }

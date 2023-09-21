@@ -66,8 +66,8 @@ class StudentController extends Controller
         return redirect('/home');
     }
 
-    public function edit(Request $request) {
-        $studentData = Student::where('id_number', $request->id_number)->get()->toArray();
+    public function edit($id_number) {
+        $studentData = Student::where('id_number', $id_number)->get()->toArray();
         return Inertia::render('student', [
             'title' => 'Student list | edit',
             'header' => 'Edit student',

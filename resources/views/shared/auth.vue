@@ -1,6 +1,6 @@
 <template>
     <header class="header">
-        <h2 class="text-blue-500 cursor-pointer btn normal-case btn-ghost text-[18px]" @click="backHome">StudentList</h2>
+        <Link href="/home" as="button" method="get" class="text-blue-500 cursor-pointer btn normal-case btn-ghost text-[18px]" @click="backHome">StudentList</Link>
         <div>
             <button type="button" class="btn-blue" @click="logout">Logout</button>
         </div>
@@ -12,6 +12,7 @@
 
 <script setup>
     import { router } from '@inertiajs/vue3';
+    import { Link } from '@inertiajs/vue3'
     import customJs from '../../js/global';
 
     function logout() {
@@ -30,10 +31,6 @@
             'Yes, proceed!',
             confirmedCallback
         )
-    }
-
-    function backHome() {
-        router.get('/home');
     }
 </script>
 

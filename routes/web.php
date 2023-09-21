@@ -29,6 +29,6 @@ Route::middleware(['auth'])->group(function(){
     Route::delete('/delete', [StudentController::class, 'delete']);
     Route::delete('/multiDelete', [StudentController::class, 'delete']);
     Route::post('/createProcess', [StudentController::class, 'createStudent']);
-    Route::get('/edit', [StudentController::class, 'edit']);
+    Route::get('/edit/{id_number}', [StudentController::class, 'edit']);
     Route::post('/editProcess', [StudentController::class, 'editStudent']);
 });

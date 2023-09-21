@@ -1,7 +1,7 @@
 <template>
-    <div class="k">
+    <div>
         <title>Student list | Home</title>
-        <div class="flex gap-2 justify-between md:flex-row flex-col">
+        <div class="flex gap-2 justify-between md:flex-row flex-col sticky top-0 bg-white z-[2] pb-3">
             <div class="dropdown dropdown-xs self-end">
                 <label tabindex="0" class="btn-sm btn normal-case bi bi-caret-down-fill">Multiple action</label>
                 <ul tabindex="0" class="dropdown-content z-[2] menu p-2 shadow bg-base-100 rounded-box w-52">
@@ -68,7 +68,7 @@
                         <td><a :href="`mailto:${item.email}`" class="link text-blue-500">{{ item.email }}</a></td>
                         <td class="flex gap-2">
                             <button class="btn btn-delete text-base bi bi-trash3" @click="deleteStudent(item.id_number)"></button>
-                            <button class="btn btn-blue text-base bi bi-pencil-square" @click="editStudent(item.id_number)"></button>
+                            <Link :href="`edit/${item.id_number}`" method="get" as="button" type="button" class="btn btn-blue text-base bi bi-pencil-square"></Link>
                         </td>
                     </tr>
                 </tbody>
@@ -77,15 +77,15 @@
                 <h1 class="text-[50px] text-blue-500/30">No data</h1>
             </div>
         </div>
-        <button type="button" class="btn-blue fixed bottom-[24px] right-[24px]" @click="createPage">Add Student</button>
+        <Link method="get" as="button" type="button" class="btn-blue fixed bottom-[24px] right-[24px]" href="/create">Add Student</Link>
     </div>
 </template>
 
 <script>
-    import { Head } from '@inertiajs/vue3';
     import AuthLayout from '../shared/auth.vue';
     import { router } from '@inertiajs/vue3';
     import customJs from '../../js/global';
+
 
     export default {
         layout: AuthLayout,
@@ -94,9 +94,6 @@
             type: String
         },
         methods: {
-            createPage() {
-                router.get('/create')
-            },
             deleteStudent(id) {
                 function confirmedCallback(isConfirmed) {
                     if (isConfirmed) {
@@ -108,7 +105,9 @@
                             },
                             onError: () => {
                                 customJs.error('Deletion failed!')
-                            }
+                            },
+                            preserveScroll: true,
+                            preserveState: true
                         })
                     }
                 }
@@ -122,12 +121,6 @@
                     'Yes, proceed!',
                     confirmedCallback
                 )
-            },
-            editStudent(id) {
-                router.visit('/edit', {
-                    method: 'get',
-                    data: { id_number:id },
-                });
             },
             selectAll(event){
                 if(event.target.innerText == "Select all") {
@@ -165,6 +158,7 @@
                             onError: () => {
                                 customJs.error('Deletion failed!');
                             },
+                            preserveScroll: true
                         })
                     }
                 }
@@ -183,7 +177,9 @@
                 let type = event.target.value;
                 router.visit('/home', {
                     method: 'get',
-                    data: {student_type:type}
+                    data: {student_type:type},
+                    preserveScroll: true,
+                    preserveState: true
                 })
             },
             diffMins(date) {
@@ -213,6 +209,10 @@
             }
         }
     }
+</script>
+
+<script setup>
+    import { Link } from '@inertiajs/vue3'
 </script>
 
 <style lang="scss" scoped>

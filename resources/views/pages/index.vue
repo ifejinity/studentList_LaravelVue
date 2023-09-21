@@ -1,12 +1,14 @@
 <template>
     <div class="loginPage">
-        <Head title="Student list | Login" />
+        <head>
+            <title>"Student list | Login"</title>
+        </head>
         <!-- login form -->
         <form @submit.prevent="login" class="loginForm">
             <h1 class="text-blue-500 mb-2">Sign in</h1>
-            <input type="text" name="" id="" class="input-text-white mt-3" placeholder="Email" v-model="credentials.email">
+            <input type="text" class="input-text-white mt-3" placeholder="Email" v-model="credentials.email">
             <span v-if="errors.email" class="text-[14px] text-red-500">{{ errors.email }}</span>
-            <input type="password" name="" id="" class="input-text-white mt-3" placeholder="Password" v-model="credentials.password">
+            <input type="password" class="input-text-white mt-3" placeholder="Password" v-model="credentials.password">
             <span v-if="errors.password" class="text-[14px] text-red-500">{{ errors.password }}</span>
             <div class="form-control mt-3">
                 <label class="label cursor-pointer w-fit">

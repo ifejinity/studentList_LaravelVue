@@ -7,7 +7,7 @@
             </div>
         </header>
         <div class="w-full flex flex-col md:px-[10%] px-[5%]">
-            <slot />
+            <slot></slot>
         </div>
     </div>
 </template>

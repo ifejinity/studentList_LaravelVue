@@ -14,7 +14,7 @@
                 <div class="form-control w-full md:max-w-xs">
                     <label class="label">
                         <span class="label-text">Search</span>
-                        <Link href="/home" method="get" class="label-text-alt link text-[14px]">Reset</Link>
+                        <Link href="/home" method="get" class="label-text-alt link text-[14px] text-blue-500">Reset</Link>
                     </label>
                     <div class="input-group">
                         <input type="text" class="input input-bordered" placeholder="Name or ID number" id="query"/>
@@ -38,7 +38,7 @@
         </div>
         <div class="overflow-x-auto">
             <table class="table" id="myTable">
-                <thead>
+                <thead class="text-[14px]">
                     <tr>
                         <th></th>
                         <th>Student type</th>
@@ -109,10 +109,7 @@
                             data: {id:id},
                             onSuccess: () => {
                                 customJs.success('Student deleted!');
-                                const checkboxes = document.querySelectorAll('.checkbox:checked');
-                                checkboxes.forEach((checkbox) => {
-                                    checkbox.checked = false;
-                                });
+                                customJs.uncheck(document.querySelectorAll('.checkbox:checked'));
                             },
                             onError: () => {
                                 customJs.error('Deletion failed!')
@@ -161,10 +158,7 @@
                             data: {id:selectedIds},
                             onSuccess: () => {
                                 customJs.success('Student deleted!');
-                                const checkboxes = document.querySelectorAll('.checkbox:checked');
-                                checkboxes.forEach((checkbox) => {
-                                    checkbox.checked = false;
-                                });
+                                customJs.uncheck(document.querySelectorAll('.checkbox:checked'));
                             },
                             onError: () => {
                                 customJs.error('Deletion failed!');
@@ -192,7 +186,9 @@
                     method: 'get',
                     data: {student_type:type, search:query},
                     preserveScroll: true,
+                    preserveState: true
                 })
+                customJs.uncheck(document.querySelectorAll('.checkbox:checked'));
             },
             diffMins(date) {
                 function calculateMinutesDifference(datetimeString) {
@@ -215,6 +211,7 @@
                     preserveState: true,
                     preserveScroll: true
                 })
+                customJs.uncheck(document.querySelectorAll('.checkbox:checked'));
             }
         }
     }

@@ -31,9 +31,15 @@ function error(message) {
         }
     }).showToast();
 }
+function uncheck(checkboxes){
+    checkboxes.forEach((checkbox) => {
+        checkbox.checked = false;
+    });
+}
 
 export default {
     confirmation, 
     success,
     error,
+    uncheck
 }

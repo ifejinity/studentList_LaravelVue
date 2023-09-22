@@ -54,7 +54,7 @@
                     </tr>
                 </thead>
                 <tbody id="list">
-                    <tr v-for="(item, index) in student" :key="index" class="hover:bg-blue-200/30">
+                    <tr v-for="item in student" class="hover:bg-blue-200/30">
                         <td>
                             <input type="checkbox" class="checkbox checkbox-sm" :value="item.id"/>
                         </td>
@@ -118,6 +118,7 @@
                                 customJs.error('Deletion failed!')
                             },
                             preserveScroll: true,
+                            preserveState: true
                         })
                     }
                 }
@@ -186,10 +187,11 @@
             },
             filter(event) {
                 let type = event.target.value;
+                let query = this.query;
                 router.visit('/home', {
                     method: 'get',
-                    data: {student_type:type, search:this.query},
-                    preserveScroll: true
+                    data: {student_type:type, search:query},
+                    preserveScroll: true,
                 })
             },
             diffMins(date) {

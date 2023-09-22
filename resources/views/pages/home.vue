@@ -91,7 +91,8 @@
         layout: AuthLayout,
         props: {
             student: Object,
-            type: String
+            type: String,
+            query: String
         },
         methods: {
             deleteStudent(id) {
@@ -176,7 +177,7 @@
                 let type = event.target.value;
                 router.visit('/home', {
                     method: 'get',
-                    data: {student_type:type},
+                    data: {student_type:type, search:this.query},
                     preserveScroll: true,
                     preserveState: true
                 })
@@ -194,16 +195,24 @@
                 return minutesDifference
             },
             search(event) {
-                const list = document.querySelectorAll('#list tr');
-                list.forEach((e) => {
-                    const name = e.getElementsByTagName('td')[3].innerText;
-                    const id = e.getElementsByTagName('td')[2].innerText;
-                    const pattern = new RegExp(event.target.value.trim(), 'i');
-                    if (!pattern.test(name) && !pattern.test(id)) {
-                        e.classList.add('hidden');
-                    } else {
-                        e.classList.remove('hidden');
-                    }
+                // const list = document.querySelectorAll('#list tr');
+                // list.forEach((e) => {
+                //     const name = e.getElementsByTagName('td')[3].innerText;
+                //     const id = e.getElementsByTagName('td')[2].innerText;
+                //     const pattern = new RegExp(event.target.value.trim(), 'i');
+                //     if (!pattern.test(name) && !pattern.test(id)) {
+                //         e.classList.add('hidden');
+                //     } else {
+                //         e.classList.remove('hidden');
+                //     }
+                // })
+                let query = event.target.value;
+                let type = this.type;
+                router.visit('/home', {
+                    method: 'get',
+                    data: { search:query, student_type:type},
+                    preserveState: true,
+                    preserveScroll: true
                 })
             }
         }

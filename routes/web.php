@@ -19,8 +19,10 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::inertia('/', 'index')->name('index')->middleware('guest');
-Route::get('/login', [UserController::class, 'login'])->middleware('guest');
+Route::middleware(['guest'])->group(function(){
+    Route::inertia('/', 'index')->name('index');
+    Route::get('/login', [UserController::class, 'login']);
+});
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/home', [StudentController::class, 'index']);

@@ -15,7 +15,12 @@
                     <label class="label">
                         <span class="label-text">Search</span>
                     </label>
-                    <input type="text" @input="search($event)" class="input input-bordered" placeholder="Name or ID number"/>
+                    <div class="input-group">
+                        <input type="text" class="input input-bordered" placeholder="Name or ID number" id="query"/>
+                        <button class="btn btn-square" @click="search()">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                        </button>
+                    </div>
                 </div>
                 <div class="form-control w-full md:max-w-xs">
                     <label class="label">
@@ -198,23 +203,12 @@
                 const minutesDifference = calculateMinutesDifference(datetimeString);
                 return minutesDifference
             },
-            search(event) {
-                // const list = document.querySelectorAll('#list tr');
-                // list.forEach((e) => {
-                //     const name = e.getElementsByTagName('td')[3].innerText;
-                //     const id = e.getElementsByTagName('td')[2].innerText;
-                //     const pattern = new RegExp(event.target.value.trim(), 'i');
-                //     if (!pattern.test(name) && !pattern.test(id)) {
-                //         e.classList.add('hidden');
-                //     } else {
-                //         e.classList.remove('hidden');
-                //     }
-                // })
-                let query = event.target.value;
+            search() {
+                let query = document.querySelector('#query');
                 let type = this.type;
                 router.visit('/home', {
                     method: 'get',
-                    data: { search:query, student_type:type},
+                    data: { search:query.value, student_type:type},
                     preserveState: true,
                     preserveScroll: true
                 })

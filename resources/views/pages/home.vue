@@ -48,7 +48,7 @@
                     </tr>
                 </thead>
                 <tbody id="list">
-                    <tr v-for="item in student" class="hover:bg-blue-200/30">
+                    <tr v-for="(item, index) in student" :key="index" class="hover:bg-blue-200/30">
                         <td>
                             <input type="checkbox" class="checkbox checkbox-sm" :value="item.id"/>
                         </td>

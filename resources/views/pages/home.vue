@@ -14,7 +14,7 @@
                 <div class="form-control w-full md:max-w-xs">
                     <label class="label">
                         <span class="label-text">Search</span>
-                        <Link href="/home" method="get" class="label-text-alt btn btn-xs bg-red-500 hover:bg-red-400 text-white">Reset</Link>
+                        <Link href="/home" method="get" class="label-text-alt link text-[14px]">Reset</Link>
                     </label>
                     <div class="input-group">
                         <input type="text" class="input input-bordered" placeholder="Name or ID number" id="query"/>

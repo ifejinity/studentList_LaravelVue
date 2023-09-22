@@ -5,7 +5,7 @@
             <button type="button" class="btn-blue" @click="logout">Logout</button>
         </div>
     </header>
-    <div class="w-full flex flex-col md:px-[10%] px-[5%]">
+    <div class="flex flex-col md:px-[10%] px-[5%]">
         <slot></slot>
     </div>
 </template>

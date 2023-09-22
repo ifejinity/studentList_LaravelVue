@@ -27,4 +27,8 @@
     h2 {
         @apply text-[20px] font-[700]
     }
+
+    /* *{
+        @apply outline-dashed outline-1 outline-green-500
+    } */
 }

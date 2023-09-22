@@ -15,11 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::inertia('/index', 'index')->name('index')->middleware('guest');
+Route::inertia('/', 'index')->name('index')->middleware('guest');
 Route::get('/login', [UserController::class, 'login'])->middleware('guest');
 
 Route::middleware(['auth'])->group(function(){

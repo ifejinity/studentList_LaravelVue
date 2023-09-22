@@ -74,7 +74,7 @@
                 </tbody>
             </table>
             <div v-if="student == 0" class="w-full flex justify-center">
-                <h1 class="text-[50px] text-blue-500/30">No data</h1>
+                <h1 class="text-[50px] text-blue-500/30">No available data</h1>
             </div>
         </div>
         <Link method="get" as="button" type="button" class="btn-blue fixed bottom-[24px] right-[24px]" href="/create">Add Student</Link>

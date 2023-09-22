@@ -38,5 +38,4 @@
     .header {
         @apply w-full flex justify-between p-5;
     }
-
 </style>

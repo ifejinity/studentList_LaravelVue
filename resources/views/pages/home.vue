@@ -107,7 +107,6 @@
                                 customJs.error('Deletion failed!')
                             },
                             preserveScroll: true,
-                            preserveState: true
                         })
                     }
                 }
@@ -158,7 +157,7 @@
                             onError: () => {
                                 customJs.error('Deletion failed!');
                             },
-                            preserveScroll: true
+                            preserveScroll: true,
                         })
                     }
                 }

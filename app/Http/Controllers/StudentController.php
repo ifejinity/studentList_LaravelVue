@@ -67,12 +67,12 @@ class StudentController extends Controller
     }
 
     public function edit($id) {
-        $studentData = Student::findOrFail($id)->get()->toArray();
+        $studentData = Student::findOrFail($id);
         return Inertia::render('student', [
             'title' => 'Student list | edit',
             'header' => 'Edit student',
             'method' => 'edit',
-            'student' => $studentData[0]
+            'student' => $studentData
         ]);
     }
 

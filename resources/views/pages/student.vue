@@ -7,7 +7,6 @@
 </template>
 
 <script>
-    // import { Head } from '@inertiajs/vue3';
     import AuthLayout from '../shared/auth.vue';
     import StudentForm from '../shared/studentForm.vue';
 

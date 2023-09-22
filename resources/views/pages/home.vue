@@ -103,6 +103,10 @@
                             data: {id:id},
                             onSuccess: () => {
                                 customJs.success('Student deleted!');
+                                const checkboxes = document.querySelectorAll('.checkbox:checked');
+                                checkboxes.forEach((checkbox) => {
+                                    checkbox.checked = false;
+                                });
                             },
                             onError: () => {
                                 customJs.error('Deletion failed!')
@@ -126,17 +130,13 @@
                 if(event.target.innerText == "Select all") {
                     const checkboxes = document.querySelectorAll('.checkbox:not(:checked)');
                     checkboxes.forEach((checkbox) => {
-                        if(!checkbox.closest('tr').classList.contains('hidden')){
-                            checkbox.checked = true;
-                        }
+                        checkbox.checked = true;
                     });
                     event.target.innerText = "Unselect all"
                 } else {
                     const checkboxes = document.querySelectorAll('.checkbox:checked');
                     checkboxes.forEach((checkbox) => {
-                        if(!checkbox.closest('tr').classList.contains('hidden')){
-                            checkbox.checked = false;
-                        }
+                        checkbox.checked = false;
                     });
                     event.target.innerText = "Select all"
                 }
@@ -154,11 +154,16 @@
                             data: {id:selectedIds},
                             onSuccess: () => {
                                 customJs.success('Student deleted!');
+                                const checkboxes = document.querySelectorAll('.checkbox:checked');
+                                checkboxes.forEach((checkbox) => {
+                                    checkbox.checked = false;
+                                });
                             },
                             onError: () => {
                                 customJs.error('Deletion failed!');
                             },
                             preserveScroll: true,
+                            preserveState: true
                         })
                     }
                 }
@@ -178,8 +183,7 @@
                 router.visit('/home', {
                     method: 'get',
                     data: {student_type:type, search:this.query},
-                    preserveScroll: true,
-                    preserveState: true
+                    preserveScroll: true
                 })
             },
             diffMins(date) {

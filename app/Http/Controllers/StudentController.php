@@ -41,9 +41,14 @@ class StudentController extends Controller
     public function index(Request $request) {
         // dd($request);
         if($request->student_type === null) {
-            $studentData = Student::where('name', 'like', $request->search . '%')->orderBy('updated_at', 'desc')->get();
+            $studentData = Student::where('name', 'like', '%' . $request->search . '%')
+                                ->orWhere('id', 'like',  $request->search . '%')
+                                ->orderBy('updated_at', 'desc')->get();
         } else {
-            $studentData = Student::where('student_type', $request->student_type)->where('name', 'like', $request->search . '%')->orderBy('updated_at', 'desc')->get();
+            $studentData = Student::where('student_type', $request->student_type)
+                                ->where('name', 'like', '%' . $request->search . '%')
+                                ->orWhere('id', 'like',  $request->search . '%')
+                                ->orderBy('updated_at', 'desc')->get();
         }
         return Inertia::render('home',[
             'student' => $studentData,

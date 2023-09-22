@@ -1,7 +1,8 @@
 <template>
     <header class="header">
         <Link href="/home" as="button" method="get" class="text-blue-500 cursor-pointer btn normal-case btn-ghost text-[18px]" @click="backHome">StudentList</Link>
-        <div>
+        <div class="flex gap-3">
+            <Link href="/manager" method="get" type="button" class="btn-blue">Manager</Link>
             <button type="button" class="btn-blue" @click="logout">Logout</button>
         </div>
     </header>

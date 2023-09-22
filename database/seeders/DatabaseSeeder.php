@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(100)->create();
         Student::factory(300)->create();
+        
         // create permissions
         Permission::create(['name' => 'view students']);
         Permission::create(['name' => 'edit students']);

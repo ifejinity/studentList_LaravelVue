@@ -9,7 +9,6 @@
                     <li v-if="userRole === 'Super-Admin'"><button @click="mutiDelete">Delete selected</button></li>
                 </ul>
                 <p class="mt-2 text-[14px] font-[500]">Number of records: {{ student.length }}</p>
-                {{ userRole }}
             </div>
             <div class="flex gap-3 md:flex-row flex-col">
                 <div class="form-control w-full md:max-w-xs">

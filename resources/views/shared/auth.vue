@@ -1,6 +1,6 @@
 <template>
     <header class="header">
-        <Link href="/home" as="button" method="get" class="text-blue-500 cursor-pointer btn normal-case btn-ghost text-[18px]" @click="backHome">StudentList</Link>
+        <Link href="/home" as="button" method="get" class="text-blue-500 cursor-pointer btn normal-case btn-ghost text-[18px]" @click="backHome">{{ userRole }}</Link>
         <div class="flex gap-3">
             <Link v-if="userRole === 'Super-Admin'" href="/manager" method="get" type="button" class="btn-blue">Manager</Link>
             <button type="button" class="btn-blue" @click="logout">Logout</button>
@@ -15,7 +15,7 @@
     import { router } from '@inertiajs/vue3';
     import { Link } from '@inertiajs/vue3'
     import customJs from '../../js/global';
-
+    const props = defineProps(['userRole']);
     function logout() {
         function confirmedCallback(isConfirmed) {
             if (isConfirmed) {

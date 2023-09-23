@@ -17,7 +17,8 @@
             header: String,
             method: String,
             errors: Object,
-            student: Object
+            student: Object,
+            userRole: String
         },
         components: {
             StudentForm

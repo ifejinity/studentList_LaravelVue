@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
@@ -39,8 +41,13 @@ class StudentController extends Controller
         return $validated;
     }
 
+    public function getUserRole($user) {
+        $userRole = Arr::first($user->roles)->name;
+        return $userRole;
+    }
+
     public function index(Request $request) {
-        $userRole = Arr::first(Auth::user()->roles)->name;
+        $userRole = $this->getUserRole(Auth::user());
         $studentData = Student::where('student_type', 'like',  $request->student_type . '%')
         ->where(function ($query) use ($request) {
             $query->where('name', 'like', '%' . $request->search . '%')
@@ -56,11 +63,13 @@ class StudentController extends Controller
     }
 
     public function create() {
+        $userRole = $this->getUserRole(Auth::user());
         return Inertia::render('student', [
             'title' => 'Student list | create',
             'header' => 'Add student',
             'method' => 'create',
-            'student' => []
+            'student' => [],
+            'userRole' => $userRole
         ]);
     }
 
@@ -72,12 +81,14 @@ class StudentController extends Controller
     }
 
     public function edit($id) {
+        $userRole = $this->getUserRole(Auth::user());
         $studentData = Student::findOrFail($id);
         return Inertia::render('student', [
             'title' => 'Student list | edit',
             'header' => 'Edit student',
             'method' => 'edit',
-            'student' => $studentData
+            'student' => $studentData,
+            'userRole' => $userRole
         ]);
     }
 

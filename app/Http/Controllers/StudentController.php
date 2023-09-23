@@ -6,6 +6,7 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class StudentController extends Controller
@@ -39,6 +40,7 @@ class StudentController extends Controller
     }
 
     public function index(Request $request) {
+        $userRole = Arr::first(Auth::user()->roles)->name;
         $studentData = Student::where('student_type', 'like',  $request->student_type . '%')
         ->where(function ($query) use ($request) {
             $query->where('name', 'like', '%' . $request->search . '%')
@@ -48,7 +50,8 @@ class StudentController extends Controller
         return Inertia::render('home',[
             'student' => $studentData,
             'type' => $request->student_type,
-            'query' => $request->search
+            'query' => $request->search,
+            'userRole' => $userRole
         ]);
     }
 

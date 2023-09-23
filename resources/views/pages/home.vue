@@ -6,9 +6,10 @@
                 <label tabindex="0" class="btn-sm btn normal-case bi bi-caret-down-fill">Multiple action</label>
                 <ul tabindex="0" class="dropdown-content z-[2] menu p-2 shadow bg-base-100 rounded-box w-52">
                     <li><button @click="selectAll($event)">Select all</button></li>
-                    <li><button @click="mutiDelete">Delete selected</button></li>
+                    <li v-if="userRole === 'Super-Admin'"><button @click="mutiDelete">Delete selected</button></li>
                 </ul>
                 <p class="mt-2 text-[14px] font-[500]">Number of records: {{ student.length }}</p>
+                {{ userRole }}
             </div>
             <div class="flex gap-3 md:flex-row flex-col">
                 <div class="form-control w-full md:max-w-xs">
@@ -40,7 +41,7 @@
             <table class="table" id="myTable">
                 <thead class="text-[14px]">
                     <tr>
-                        <th></th>
+                        <th v-if="userRole === 'Super-Admin' || userRole === 'admin'"></th>
                         <th>Student type</th>
                         <th>ID number</th>
                         <th>Name</th>
@@ -50,12 +51,12 @@
                         <th>Mobile number</th>
                         <th>Grades</th>
                         <th>Email</th>
-                        <th>Action</th>
+                        <th v-if="userRole === 'Super-Admin' || userRole === 'admin'">Action</th>
                     </tr>
                 </thead>
                 <tbody id="list">
                     <tr v-for="item in student" class="hover:bg-blue-200/30">
-                        <td>
+                        <td v-if="userRole === 'Super-Admin' || userRole === 'admin'">
                             <input type="checkbox" class="checkbox checkbox-sm" :value="item.id"/>
                         </td>
                         <td>
@@ -72,8 +73,8 @@
                         <td><a :href="`tel:${item.mobile_number}`" class="link text-blue-500">{{ item.mobile_number }}</a></td>
                         <td>{{ parseFloat(item.grades, 2) }}</td>
                         <td><a :href="`mailto:${item.email}`" class="link text-blue-500">{{ item.email }}</a></td>
-                        <td class="flex gap-2">
-                            <button class="btn btn-delete text-base bi bi-trash3" @click="deleteStudent(item.id)"></button>
+                        <td class="flex gap-2" v-if="userRole === 'Super-Admin' || userRole === 'admin'">
+                            <button v-if="userRole === 'Super-Admin'" class="btn btn-delete text-base bi bi-trash3" @click="deleteStudent(item.id)"></button>
                             <Link :href="`edit/${item.id}`" method="get" as="button" type="button" class="btn btn-blue text-base bi bi-pencil-square"></Link>
                         </td>
                     </tr>
@@ -83,7 +84,7 @@
                 <h1 class="text-[50px] text-blue-500/30">No available data</h1>
             </div>
         </div>
-        <Link method="get" as="button" type="button" class="btn-blue fixed bottom-[24px] right-[24px]" href="/create">Add Student</Link>
+        <Link v-if="userRole === 'Super-Admin' || userRole === 'admin'" method="get" as="button" type="button" class="btn-blue fixed bottom-[24px] right-[24px]" href="/create">Add Student</Link>
     </div>
 </template>
 
@@ -98,7 +99,8 @@
         props: {
             student: Object,
             type: String,
-            query: String
+            query: String,
+            userRole: String
         },
         methods: {
             deleteStudent(id) {

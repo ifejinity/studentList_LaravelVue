@@ -85,13 +85,13 @@
         </div>
         <Link v-if="userRole === 'Super-Admin' || userRole === 'admin'" method="get" as="button" type="button" class="btn-blue fixed bottom-[24px] right-[24px]" href="/create">Add Student</Link>
     </div>
+    <span>{{ publishedBooksMessage }}</span>
 </template>
 
 <script>
     import AuthLayout from '../shared/auth.vue';
     import { router } from '@inertiajs/vue3';
     import customJs from '../../js/global';
-
 
     export default {
         layout: AuthLayout,
@@ -220,7 +220,19 @@
 
 <script setup>
     import { Link } from '@inertiajs/vue3'
+    import { reactive, computed } from 'vue'
+    const author = reactive({
+        name: 'John Doe',
+        books: [
+            'Vue 2 - Advanced Guide',
+            'Vue 3 - Basic Guide',
+        ]
+    })
+    const publishedBooksMessage = computed(() => {
+        return author.books.length
+    })
 </script>
+
 
 <style lang="scss" scoped>
     

@@ -52,12 +52,13 @@ class StudentController extends Controller
         ->where(function ($query) use ($request) {
             $query->where('name', 'like', '%' . $request->search . '%')
             ->orWhere('id', 'like', $request->search . '%');
-        })->orderBy('updated_at', 'desc')->get();
+        })->orderBy('updated_at', 'desc')
+        ->paginate(10)->appends(['student_type' => $request->student_type, 'search'=> $request->search]);
 
         return Inertia::render('home',[
             'student' => $studentData,
             'type' => $request->student_type,
-            'query' => $request->search,
+            'search' => $request->search,
             'userRole' => $userRole
         ]);
     }

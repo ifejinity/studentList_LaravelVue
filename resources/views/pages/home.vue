@@ -8,7 +8,7 @@
                     <li><button @click="selectAll($event)">Select all</button></li>
                     <li v-if="userRole === 'Super-Admin'"><button @click="mutiDelete">Delete selected</button></li>
                 </ul>
-                <p class="mt-2 text-[14px] font-[500]">Number of records: {{ student.length }}</p>
+                <p class="mt-2 text-[14px] font-[500]">Number of records: {{ student.total }}</p>
             </div>
             <div class="flex gap-3 md:flex-row flex-col">
                 <div class="form-control w-full md:max-w-xs">
@@ -17,7 +17,7 @@
                         <Link href="/home" method="get" class="label-text-alt link text-[14px] text-blue-500">Reset</Link>
                     </label>
                     <div class="input-group">
-                        <input type="text" class="input input-bordered md:w-fit w-full" placeholder="Name or ID number" id="query"/>
+                        <input type="text" class="input input-bordered md:w-fit w-full" placeholder="Name or ID number" id="query" v-model="searchValue"/>
                         <button class="btn btn-square" @click="search()">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                         </button>
@@ -54,7 +54,7 @@
                     </tr>
                 </thead>
                 <tbody id="list">
-                    <tr v-for="item in student" class="hover:bg-blue-200/30">
+                    <tr v-for="item in student.data" class="hover:bg-blue-200/30">
                         <td v-if="userRole === 'Super-Admin' || userRole === 'admin'">
                             <input type="checkbox" class="checkbox checkbox-sm" :value="item.id"/>
                         </td>
@@ -84,12 +84,24 @@
             </div>
         </div>
         <Link v-if="userRole === 'Super-Admin' || userRole === 'admin'" method="get" as="button" type="button" class="btn-blue fixed bottom-[24px] right-[24px]" href="/create">Add Student</Link>
+        <!-- paginator -->
+        <div class="join flex md:flex-row flex-col justify-center w-full my-5">
+            <Link 
+                :href="`${page.url}`" 
+                v-for="page in student.links" 
+                v-html="page.label" 
+                :class="`join-item btn ${page.active == true ? 'btn-blue' : ''} ${page.url ?? 'btn-disabled'}`"
+                :preserveScroll="true"
+                :preserveState="true">
+            </Link>
+        </div>
     </div>
 </template>
 
 <script>
     import AuthLayout from '../shared/auth.vue';
     import { router } from '@inertiajs/vue3';
+    import { ref } from 'vue';
     import customJs from '../../js/global';
 
     export default {
@@ -97,7 +109,7 @@
         props: {
             student: Object,
             type: String,
-            query: String,
+            search: String,
             userRole: String
         },
         methods: {
@@ -181,7 +193,7 @@
             },
             filter(event) {
                 let type = event.target.value;
-                let query = this.query;
+                let query = this.search;
                 router.visit('/home', {
                     method: 'get',
                     data: {student_type:type, search:query},
@@ -213,8 +225,18 @@
                 })
                 customJs.uncheck(document.querySelectorAll('.checkbox:checked'));
             }
+        },
+        setup(props) {
+            const searchValue = ref(props.search);
+            return {
+                searchValue
+            };
         }
     }
+</script>
+
+<script setup>
+    import { Link } from '@inertiajs/vue3';
 </script>
 
 <style lang="scss" scoped>

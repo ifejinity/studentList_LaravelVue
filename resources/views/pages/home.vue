@@ -74,7 +74,7 @@
                         <td><a :href="`mailto:${item.email}`" class="link text-blue-500">{{ item.email }}</a></td>
                         <td class="flex gap-2" v-if="userRole === 'Super-Admin' || userRole === 'admin'">
                             <button v-if="userRole === 'Super-Admin'" class="btn btn-delete text-base bi bi-trash3" @click="deleteStudent(item.id)"></button>
-                            <Link :href="`edit/${item.id}`" method="get" as="button" type="button" class="btn btn-blue text-base bi bi-pencil-square"></Link>
+                            <Link href="/edit" :data="{ id:item.id }" method="get" as="button" type="button" class="btn btn-blue text-base bi bi-pencil-square"></Link>
                         </td>
                     </tr>
                 </tbody>

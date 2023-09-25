@@ -81,9 +81,9 @@ class StudentController extends Controller
         return redirect('/home');
     }
 
-    public function edit($id) {
+    public function edit(Request $request) {
         $userRole = $this->getUserRole(Auth::user());
-        $studentData = Student::findOrFail($id);
+        $studentData = Student::findOrFail($request->id);
         return Inertia::render('student', [
             'title' => 'Student list | edit',
             'header' => 'Edit student',

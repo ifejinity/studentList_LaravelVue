@@ -34,7 +34,7 @@ Route::middleware(['auth'])->group(function(){
     Route::group(['middleware' => ['role:Super-Admin|admin']], function () {
         Route::get('/create', [StudentController::class, 'create']);
         Route::post('/createProcess', [StudentController::class, 'createStudent']);
-        Route::get('/edit/{id_number}', [StudentController::class, 'edit']);
+        Route::get('/edit', [StudentController::class, 'edit']);
         Route::post('/editProcess', [StudentController::class, 'editStudent']);
     });
 

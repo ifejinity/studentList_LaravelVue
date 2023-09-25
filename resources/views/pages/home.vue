@@ -13,6 +13,17 @@
             <div class="flex gap-3 md:flex-row flex-col">
                 <div class="form-control w-full md:max-w-xs">
                     <label class="label">
+                        <span class="label-text">Show only</span>
+                    </label>
+                    <select @change="filter($event)" class="select select-bordered w-full md:max-w-xs" :value="type">
+                        <option selected disabled>Select type</option>
+                        <option value="">All</option>
+                        <option value="foreign">Foreign</option>
+                        <option value="local">Local</option>
+                    </select>
+                </div>
+                <div class="form-control w-full md:max-w-xs">
+                    <label class="label">
                         <span class="label-text">Search</span>
                         <Link href="/home" method="get" class="label-text-alt link text-[14px] text-blue-500">Reset</Link>
                     </label>

@@ -41,13 +41,13 @@ class StudentController extends Controller
         return $validated;
     }
 
-    public function getUserRole($user) {
-        $userRole = Arr::first($user->roles)->name;
+    public function getUserRole() {
+        $userRole = Arr::first(Auth::user()->roles)->name;
         return $userRole;
     }
 
     public function index(Request $request) {
-        $userRole = $this->getUserRole(Auth::user());
+        $userRole = $this->getUserRole();
         $studentData = Student::where('student_type', 'like',  $request->student_type . '%')
         ->where(function ($query) use ($request) {
             $query->where('name', 'like', '%' . $request->search . '%')
@@ -64,7 +64,7 @@ class StudentController extends Controller
     }
 
     public function create() {
-        $userRole = $this->getUserRole(Auth::user());
+        $userRole = $this->getUserRole();
         return Inertia::render('student', [
             'title' => 'Student list | create',
             'header' => 'Add student',

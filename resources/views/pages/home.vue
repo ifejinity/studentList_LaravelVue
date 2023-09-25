@@ -85,21 +85,13 @@
         </div>
         <Link v-if="userRole === 'Super-Admin' || userRole === 'admin'" method="get" as="button" type="button" class="btn-blue fixed bottom-[24px] right-[24px]" href="/create">Add Student</Link>
         <!-- paginator -->
-        <div class="join flex md:flex-row flex-col justify-center w-full my-5">
-            <Link 
-                :href="`${page.url}`" 
-                v-for="page in student.links" 
-                v-html="page.label" 
-                :class="`join-item btn ${page.active == true ? 'btn-blue' : ''} ${page.url ?? 'btn-disabled'}`"
-                :preserveScroll="true"
-                :preserveState="true">
-            </Link>
-        </div>
+        <paginator :data="student"/>
     </div>
 </template>
 
 <script>
     import AuthLayout from '../shared/auth.vue';
+    import paginator  from "../shared/paginator.vue";
     import { router } from '@inertiajs/vue3';
     import { ref } from 'vue';
     import customJs from '../../js/global';
@@ -226,8 +218,8 @@
                 customJs.uncheck(document.querySelectorAll('.checkbox:checked'));
             }
         },
-        setup(props) {
-            const searchValue = ref(props.search);
+        setup() {
+            const searchValue = ref(this.search);
             return {
                 searchValue
             };

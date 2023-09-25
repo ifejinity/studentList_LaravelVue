@@ -41,7 +41,6 @@ Route::middleware(['auth'])->group(function(){
     Route::group(['middleware' => ['role:Super-Admin']], function () {
         Route::delete('/delete', [StudentController::class, 'delete']);
         Route::delete('/multiDelete', [StudentController::class, 'delete']);
-        // practice a
         Route::inertia('/manager', 'permissionManager');
         Route::get('/createrole', [UserController::class, 'createRole']);
     });

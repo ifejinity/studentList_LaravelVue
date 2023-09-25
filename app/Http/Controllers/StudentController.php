@@ -81,7 +81,7 @@ class StudentController extends Controller
     }
 
     public function edit(Request $request) {
-        $userRole = $this->getUserRole(Auth::user());
+        $userRole = $this->getUserRole();
         $studentData = Student::findOrFail($request->id);
         return Inertia::render('student', [
             'title' => 'Student list | edit',
